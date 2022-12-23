@@ -3,6 +3,7 @@ import { throttle } from 'lodash';
 const form = document.querySelector('.feedback-form');
 const emailInput = form.elements.email;
 const messageInput = form.elements.message;
+const formKey = 'feedback-form-state';
 
 form.addEventListener('submit', saveForm);
 form.addEventListener('input', throttle(updateStorage, 1000));
@@ -13,17 +14,19 @@ function updateStorage(evt) {
     email: emailInput.value,
     message: messageInput.value,
   };
-  localStorage.setItem('feedback-form-state', JSON.stringify(formInput));
-  console.log(localStorage.getItem('feedback-form-state'));
+  localStorage.setItem(formKey, JSON.stringify(formInput));
+  console.log(localStorage.getItem(formKey));
 }
 
-const parsedInput = JSON.parse(localStorage.getItem('feedback-form-state'));
-emailInput.value = parsedInput.email || '';
-messageInput.value = parsedInput.message || '';
+const parsedInput = JSON.parse(localStorage.getItem(formKey));
+
+emailInput.value = parsedInput.email ? parsedInput.email : '';
+messageInput.value = parsedInput.message ? parsedInput.message : '';
 
 function saveForm(evt) {
   evt.preventDefault();
   form.reset();
   console.log(parsedInput);
-  localStorage.clear();
+  localStorage.removeItem(formKey);
+  // не розумію чому видає null з пустим сховищем, я наче добавив перевірку. Чи з нею щось не то? Чи зі мною ._.
 }
