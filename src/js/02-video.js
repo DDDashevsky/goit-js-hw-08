@@ -21,4 +21,4 @@ function timeupdate(evt) {
 
 const getTime = localStorage.getItem(timeKey);
 
-getTime = player.setCurrentTime(getTime ?? 0); //: player.setCurrentTime(0);
+player.setCurrentTime(getTime ?? 0); //: player.setCurrentTime(0);

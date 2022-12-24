@@ -18,7 +18,7 @@ function updateStorage(evt) {
   console.log(localStorage.getItem(formKey));
 }
 
-const parsedInput = JSON.parse(localStorage.getItem(formKey)) ?? [];
+const parsedInput = JSON.parse(localStorage.getItem(formKey)) ?? {};
 
 emailInput.value = parsedInput.email ?? ''; // parsedInput.email : '';
 messageInput.value = parsedInput.message ?? ''; // parsedInput.message : '';
