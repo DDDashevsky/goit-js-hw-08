@@ -18,16 +18,14 @@ function updateStorage(evt) {
   console.log(localStorage.getItem(formKey));
 }
 
-const parsedInput = JSON.parse(localStorage.getItem(formKey));
+const parsedInput = JSON.parse(localStorage.getItem(formKey)) ?? [];
 
-emailInput.value = parsedInput.email ? parsedInput.email : '';
-messageInput.value = parsedInput.message ? parsedInput.message : '';
+emailInput.value = parsedInput.email ?? ''; // parsedInput.email : '';
+messageInput.value = parsedInput.message ?? ''; // parsedInput.message : '';
 
 function saveForm(evt) {
   evt.preventDefault();
   form.reset();
-  console.log(parsedInput);
   localStorage.removeItem(formKey);
-  // не розумію чому консоль видає null з пустим сховищем.
-  // я наче добавив перевірку.Чи з нею щось не то ? Чи зі мною._.
+  console.log(parsedInput);
 }
